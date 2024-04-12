@@ -2,13 +2,14 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
-    
+
     public static String mudarDirection(String directionAtual, String caracterDeCurva) {
         if (caracterDeCurva == "/"){
             switch(directionAtual){
                 //validar a direção atual e quando faz uma curva vai para qual,
                 //exemplo ta na esquerda tem curva qual vai ser a direção?
                 // a direção varia dependendo se é \ ou /
+                // dai retorna a nova direção, que vai ser atribuida aquela variavel principal
             }
         }
         if(caracterDeCurva == "\""){
