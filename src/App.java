@@ -2,11 +2,29 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
+    
+    public static String mudarDirection(String directionAtual, String caracterDeCurva) {
+        if (caracterDeCurva == "/"){
+            switch(directionAtual){
+                //validar a direção atual e quando faz uma curva vai para qual,
+                //exemplo ta na esquerda tem curva qual vai ser a direção?
+                // a direção varia dependendo se é \ ou /
+            }
+        }
+        if(caracterDeCurva == "\""){
+            switch(directionAtual){
+                //aqui a mesma coisa
+            }
+        }
+
+        return "";
+    }
+
     public static void main(String[] args) throws Exception {
         
         int linhas, colunas;
-        
         Scanner sc = new Scanner(System.in);
+    
         System.out.println("Digite o numero de linhas e colunas desejado para seu mapa.");
         linhas = sc.nextInt();
         colunas = sc.nextInt();
@@ -27,7 +45,12 @@ public class App {
         int percorrerLinhas = 0, percorrerColunas = 0;
         String caracterPercorrido;
 
-        LinkedList<Integer> listaDinheiroCapturado = new LinkedList<>();
+        //Direção com valor default como direita.
+        String direction = "direita";
+
+
+        LinkedList<String> listaDinheiroCapturado = new LinkedList<>();
+
 
         while(true){
             try {
@@ -36,11 +59,39 @@ public class App {
                 break;
             }
 
+            if(caracterPercorrido == "#") break;
+
+            if(caracterPercorrido == "/" || caracterPercorrido == "\""){
+                direction = mudarDirection(direction, caracterPercorrido);
+            } 
+
+            
+            // por enquanto podemos pegar o dinheiro e aplicar um separador, a lista ficaria assim
+            // Exemplo: --80----10---23--10--98-78
+            // Depois fica facil de pegar a ordem e transformar para inteiro, depois podemos discutir melhor a forma mais ideal de fazer isso
             if (caracterPercorrido.matches("[0-9.]+") && Integer.parseInt(caracterPercorrido) >= 0)
-                listaDinheiroCapturado.add(Integer.parseInt(caracterPercorrido));
+                listaDinheiroCapturado.add(caracterPercorrido);
+                else listaDinheiroCapturado.add("-");
 
-            percorrerColunas++;
+            switch (direction) {
+                case "direita":
+                    percorrerColunas++;
+                    break;
+                case "esquerda":
+                    percorrerColunas--;
+                    break;
+                case "cima":
+                    percorrerLinhas--;
+                case "baixo":
+                    percorrerLinhas++;
+                default:
+                    break;
+            }
+        }
 
+
+        for (String dinheiro : listaDinheiroCapturado) {
+            System.out.println(dinheiro);
         }
         sc.close();
     }
