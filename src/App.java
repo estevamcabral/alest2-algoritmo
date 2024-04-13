@@ -8,7 +8,9 @@ public class App {
             switch(directionAtual){
                 case "cima":
                  return "direita";
-                
+                case "baixo":
+                 return "esquerda";
+
                 default:
                 break;
             }
@@ -66,7 +68,7 @@ public class App {
             } catch (ArrayIndexOutOfBoundsException e) {
                 break;
             }
-            System.out.println("linha" + percorrerLinhas);
+            System.out.println("direction " + direction);
             if(caracterPercorrido == "#") break;
             
             if(caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")){
@@ -90,8 +92,10 @@ public class App {
                     break;
                 case "cima":
                     percorrerLinhas--;
+                    break;
                 case "baixo":
                     percorrerLinhas++;
+                    break;
                 default:
                     System.out.println("curva não permitida!");
                     break;
