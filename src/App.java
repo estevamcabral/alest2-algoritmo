@@ -4,17 +4,24 @@ import java.util.Scanner;
 public class App {
 
     public static String mudarDirection(String directionAtual, String caracterDeCurva) {
-        if (caracterDeCurva == "/"){
+        if (caracterDeCurva.equals("/")){
             switch(directionAtual){
-                //validar a direção atual e quando faz uma curva vai para qual,
-                //exemplo ta na esquerda tem curva qual vai ser a direção?
-                // a direção varia dependendo se é \ ou /
-                // dai retorna a nova direção, que vai ser atribuida aquela variavel principal
+                case "cima":
+                 return "direita";
+                
+                default:
+                break;
             }
         }
-        if(caracterDeCurva == "\""){
+        if(caracterDeCurva.equals("\\")){
             switch(directionAtual){
-                //aqui a mesma coisa
+                case "direita":
+                 return "baixo";
+                case "esquerda":
+                 return "cima";
+
+                default:
+                break;
             }
         }
 
@@ -59,10 +66,10 @@ public class App {
             } catch (ArrayIndexOutOfBoundsException e) {
                 break;
             }
-
+            System.out.println("linha" + percorrerLinhas);
             if(caracterPercorrido == "#") break;
-
-            if(caracterPercorrido == "/" || caracterPercorrido == "\""){
+            
+            if(caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")){
                 direction = mudarDirection(direction, caracterPercorrido);
             } 
 
@@ -86,13 +93,14 @@ public class App {
                 case "baixo":
                     percorrerLinhas++;
                 default:
+                    System.out.println("curva não permitida!");
                     break;
             }
         }
 
 
         for (String dinheiro : listaDinheiroCapturado) {
-            System.out.println(dinheiro);
+            System.out.print(dinheiro + " ");
         }
         sc.close();
     }
