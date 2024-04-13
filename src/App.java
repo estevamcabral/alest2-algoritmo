@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class App {
 
-    public static String mudarDirection(String directionAtual, String caracterDeCurva, boolean firstLine) {
-        if (caracterDeCurva.equals("/") && firstLine) {
+    public static String mudarDirection(String directionAtual, String caracterDeCurva) {
+        if (caracterDeCurva.equals("/")) {
             switch (directionAtual) {
                 case "cima":
                     return "direita";
@@ -60,7 +60,6 @@ public class App {
         String caracterPercorrido;
 
         String direction = "direita";
-        boolean firstLine = true;
 
         LinkedList<String> listaDinheiroCapturado = new LinkedList<>();
 
@@ -75,9 +74,9 @@ public class App {
             System.out.println("caracter " + caracterPercorrido);
             if (caracterPercorrido.equals("#"))
                 break;
-
-            if (caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")) {
-                direction = mudarDirection(direction, caracterPercorrido, firstLine);
+                
+            if ((caracterPercorrido.equals("/") && (percorrerLinhas-1 >= 0 || direction=="esquerda"))|| caracterPercorrido.equals("\\")) {
+                direction = mudarDirection(direction, caracterPercorrido);
             }
 
             if (caracterPercorrido.matches("[0-9.]+") && Integer.parseInt(caracterPercorrido) >= 0)
@@ -102,8 +101,6 @@ public class App {
                     System.out.println("curva não permitida!");
                     break;
             }
-            firstLine = false;
-
         }
 
         for (String dinheiro : listaDinheiroCapturado) {
