@@ -1,87 +1,89 @@
+import java.io.File;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
 
-    public static String mudarDirection(String directionAtual, String caracterDeCurva) {
-        if (caracterDeCurva.equals("/")){
-            switch(directionAtual){
+    public static String mudarDirection(String directionAtual, String caracterDeCurva, boolean firstLine) {
+        if (caracterDeCurva.equals("/") && firstLine) {
+            switch (directionAtual) {
                 case "cima":
-                 return "direita";
+                    return "direita";
                 case "baixo":
-                 return "esquerda";
-
-                default:
-                break;
-            }
-        }
-        if(caracterDeCurva.equals("\\")){
-            switch(directionAtual){
-                case "direita":
-                 return "baixo";
+                    return "esquerda";
                 case "esquerda":
-                 return "cima";
+                    return "baixo";
+                case "direita":
+                    return "cima";
 
                 default:
-                break;
+                    break;
+            }
+        }
+        if (caracterDeCurva.equals("\\")) {
+            switch (directionAtual) {
+                case "direita":
+                    return "baixo";
+                case "esquerda":
+                    return "cima";
+                case "baixo":
+                    return "direita";
+                case "cima":
+                    return "esquerda";
+
+                default:
+                    break;
             }
         }
 
-        return "";
+        return directionAtual;
     }
 
     public static void main(String[] args) throws Exception {
-        
-        int linhas, colunas;
-        Scanner sc = new Scanner(System.in);
-    
-        System.out.println("Digite o numero de linhas e colunas desejado para seu mapa.");
-        linhas = sc.nextInt();
-        colunas = sc.nextInt();
-        sc.nextLine();
 
-        //lendo mapa
-        String[][] mapa = new String[linhas][colunas];
-        for (int i = 0; i < linhas; i++) {
-            String str = sc.nextLine();
-            String[] linha = str.split("");
-                for (int j = 0;  j < linha.length; j++) {
-                    mapa[i][j] = linha[j];
-                }
+        File file = new File("src/casoD50.txt");
+        Scanner scanner = new Scanner(file);
+
+        String[][] mapa = new String[50][50];
+
+        for (int i = 0; i < 50 && scanner.hasNextLine(); i++) {
+            String[] linha = scanner.nextLine().split("");
+            System.out.println("LINHA " + linha);
+            for (int j = 0; j < linha.length && j < 50; j++) {
+                mapa[i][j] = linha[j];
+            }
         }
-    
-   
+        
+        scanner.close();
 
         int percorrerLinhas = 0, percorrerColunas = 0;
         String caracterPercorrido;
 
-        //Direção com valor default como direita.
         String direction = "direita";
-
+        boolean firstLine = true;
 
         LinkedList<String> listaDinheiroCapturado = new LinkedList<>();
 
-
-        while(true){
+        while (true) {
             try {
                 caracterPercorrido = mapa[percorrerLinhas][percorrerColunas];
             } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("error " + e.getMessage());
                 break;
             }
-            System.out.println("direction " + direction);
-            if(caracterPercorrido == "#") break;
-            
-            if(caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")){
-                direction = mudarDirection(direction, caracterPercorrido);
-            } 
 
-            
-            // por enquanto podemos pegar o dinheiro e aplicar um separador, a lista ficaria assim
-            // Exemplo: --80----10---23--10--98-78
-            // Depois fica facil de pegar a ordem e transformar para inteiro, depois podemos discutir melhor a forma mais ideal de fazer isso
+            System.out.println("caracter " + caracterPercorrido);
+            if (caracterPercorrido.equals("#"))
+                break;
+
+            if (caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")) {
+                direction = mudarDirection(direction, caracterPercorrido, firstLine);
+            }
+
             if (caracterPercorrido.matches("[0-9.]+") && Integer.parseInt(caracterPercorrido) >= 0)
                 listaDinheiroCapturado.add(caracterPercorrido);
-                else listaDinheiroCapturado.add("-");
+            else
+                listaDinheiroCapturado.add("-");
 
             switch (direction) {
                 case "direita":
@@ -100,12 +102,12 @@ public class App {
                     System.out.println("curva não permitida!");
                     break;
             }
-        }
+            firstLine = false;
 
+        }
 
         for (String dinheiro : listaDinheiroCapturado) {
             System.out.print(dinheiro + " ");
         }
-        sc.close();
     }
 }
