@@ -116,8 +116,17 @@ public class App {
                 listaDinheiroCapturado.add("-");
             }
         }
-        for (String dinheiro : listaDinheiroCapturado) {
-            System.out.print(dinheiro + " ");
+
+        String listAsString = String.join("", listaDinheiroCapturado);
+        String numeros[] = listAsString.split("-");
+
+        int soma = 0;
+        for(String numero : numeros){
+            if (Integer.parseInt(numero) > 0){
+                soma += Integer.parseInt(numero);
+            }
         }
+        System.out.println(soma);
+
     }
 }
