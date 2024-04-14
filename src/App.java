@@ -41,7 +41,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        File file = new File("src/casoD50.txt");
+        File file = new File("src/casoG50.txt");
         Scanner scanner = new Scanner(file);
 
         String[][] mapa = new String[50][50];
@@ -94,24 +94,22 @@ public class App {
             switch (direction) {
                 case "direita":
                     percorrerColunas++;
-                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "esquerda":
                     percorrerColunas--;
-                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "cima":
                     percorrerLinhas--;
-                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "baixo":
                     percorrerLinhas++;
-                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 default:
                     System.out.println("curva não permitida!");
                     break;
             }
+            prox = mapa[percorrerLinhas][percorrerColunas];
+
             if (!prox.matches("[0-9.]+") && caracterPercorrido.matches("[0-9.]+")){
                 listaDinheiroCapturado.add("-");
             }
