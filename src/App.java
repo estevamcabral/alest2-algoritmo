@@ -62,6 +62,14 @@ public class App {
 
         LinkedList<String> listaDinheiroCapturado = new LinkedList<>();
 
+        //começo do mapa
+        for (int i = 0; i < mapa.length; i++) {
+            if (mapa[i][0] != null && mapa[i][0].equals("-")) {
+                percorrerLinhas = i;
+                break; // Assim que encontrarmos o "-", podemos sair do loop
+            }
+        }
+
         while (true) {
             try {
                 caracterPercorrido = mapa[percorrerLinhas][percorrerColunas];
@@ -73,7 +81,7 @@ public class App {
             if (caracterPercorrido.equals("#"))
                 break;
                 
-            if ((caracterPercorrido.equals("/") && (percorrerLinhas-1 >= 0 || direction.equals("esquerda")))|| caracterPercorrido.equals("\\")) {
+            if (caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")) {
                 direction = mudarDirection(direction, caracterPercorrido);
             }
 
