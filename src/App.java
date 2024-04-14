@@ -86,29 +86,36 @@ public class App {
             }
 
             if (caracterPercorrido.matches("[0-9.]+") && Integer.parseInt(caracterPercorrido) >= 0)
+            {
                 listaDinheiroCapturado.add(caracterPercorrido);
-            else
-                listaDinheiroCapturado.add("-");
+            }
 
+            String prox = "";
             switch (direction) {
                 case "direita":
                     percorrerColunas++;
+                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "esquerda":
                     percorrerColunas--;
+                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "cima":
                     percorrerLinhas--;
+                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 case "baixo":
                     percorrerLinhas++;
+                    prox = mapa[percorrerLinhas][percorrerColunas];
                     break;
                 default:
                     System.out.println("curva não permitida!");
                     break;
             }
+            if (!prox.matches("[0-9.]+") && caracterPercorrido.matches("[0-9.]+")){
+                listaDinheiroCapturado.add("-");
+            }
         }
-
         for (String dinheiro : listaDinheiroCapturado) {
             System.out.print(dinheiro + " ");
         }
