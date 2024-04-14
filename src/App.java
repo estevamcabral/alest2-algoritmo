@@ -48,7 +48,6 @@ public class App {
 
         for (int i = 0; i < 50 && scanner.hasNextLine(); i++) {
             String[] linha = scanner.nextLine().split("");
-            System.out.println("LINHA " + linha);
             for (int j = 0; j < linha.length && j < 50; j++) {
                 mapa[i][j] = linha[j];
             }
@@ -71,11 +70,10 @@ public class App {
                 break;
             }
 
-            System.out.println("caracter " + caracterPercorrido);
             if (caracterPercorrido.equals("#"))
                 break;
                 
-            if ((caracterPercorrido.equals("/") && (percorrerLinhas-1 >= 0 || direction=="esquerda"))|| caracterPercorrido.equals("\\")) {
+            if ((caracterPercorrido.equals("/") && (percorrerLinhas-1 >= 0 || direction.equals("esquerda")))|| caracterPercorrido.equals("\\")) {
                 direction = mudarDirection(direction, caracterPercorrido);
             }
 
