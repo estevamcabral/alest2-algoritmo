@@ -120,9 +120,12 @@ public class App {
         String listAsString = String.join("", listaDinheiroCapturado);
         String numeros[] = listAsString.split("-");
 
+        //System.out.println("Ordem do dinheiro encontrado:");
         int soma = 0;
+
         for(String numero : numeros){
             if (Integer.parseInt(numero) > 0){
+                //System.out.println(Integer.parseInt(numero)); < Ordem do dinheiro encontrado, descomentar para teste
                 soma += Integer.parseInt(numero);
             }
         }
