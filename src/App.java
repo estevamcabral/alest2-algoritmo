@@ -43,12 +43,14 @@ public class App {
 
         File file = new File("src/casoG50.txt");
         Scanner scanner = new Scanner(file);
+        String[] tamanho = scanner.nextLine().split(" ");
+        int tam = Integer.parseInt(tamanho[0]);
 
-        String[][] mapa = new String[50][50];
+        String[][] mapa = new String[tam][tam];
 
-        for (int i = 0; i < 50 && scanner.hasNextLine(); i++) {
+        for (int i = 0; i < tam && scanner.hasNextLine(); i++) {
             String[] linha = scanner.nextLine().split("");
-            for (int j = 0; j < linha.length && j < 50; j++) {
+            for (int j = 0; j < linha.length && j < tam; j++) {
                 mapa[i][j] = linha[j];
             }
         }
