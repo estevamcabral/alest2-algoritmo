@@ -126,7 +126,7 @@ public class App {
                 soma += Integer.parseInt(numero);
             }
         }
-        System.out.println(soma);
+        System.out.println("Total de dinheiro encontrado: " + soma);
 
     }
 }
