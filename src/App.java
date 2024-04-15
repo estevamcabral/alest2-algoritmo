@@ -41,7 +41,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        File file = new File("src/casoG50.txt");
+        File file = new File("src/casoD1500.txt");
         Scanner scanner = new Scanner(file);
         String[] tamanho = scanner.nextLine().split(" ");
         int tam = Integer.parseInt(tamanho[0]);
