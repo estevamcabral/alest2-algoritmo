@@ -3,9 +3,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
-
-    public static String mudarDirection(String directionAtual, String caracterDeCurva) {
-        if (caracterDeCurva.equals("/")) {
+ 
+    public static String mudarDirection(String directionAtual, char caracterDeCurva) {
+        if (caracterDeCurva=='/') {
             switch (directionAtual) {
                 case "cima":
                     return "direita";
@@ -20,7 +20,7 @@ public class App {
                     break;
             }
         }
-        if (caracterDeCurva.equals("\\")) {
+        if (caracterDeCurva=='\\') {
             switch (directionAtual) {
                 case "direita":
                     return "baixo";
@@ -46,19 +46,19 @@ public class App {
         String[] tamanho = scanner.nextLine().split(" ");
         int tamLinhas = Integer.parseInt(tamanho[0]);
         int tamColunas = Integer.parseInt(tamanho[1]);
-        String[][] mapa = new String[tamLinhas][tamColunas];
+        char[][] mapa = new char[tamLinhas][tamColunas];
 
         for (int i = 0; i < tamLinhas && scanner.hasNextLine(); i++) {
             String[] linha = scanner.nextLine().split("");
             for (int j = 0; j < linha.length && j < tamColunas; j++) {
-                mapa[i][j] = linha[j];
+                mapa[i][j] = linha[j].charAt(0);
             }
         }
         
         scanner.close();
 
         int percorrerLinhas = 0, percorrerColunas = 0;
-        String caracterPercorrido;
+        char caracterPercorrido;
 
         String direction = "direita";
 
@@ -66,7 +66,7 @@ public class App {
 
         //começo do mapa
         for (int i = 0; i < mapa.length; i++) {
-            if (mapa[i][0] != null && mapa[i][0].equals("-")) {
+            if (mapa[i][0] != '\0' && mapa[i][0]=='-') {
                 percorrerLinhas = i;
                 break; // Assim que encontrarmos o "-", podemos sair do loop
             }
@@ -80,19 +80,18 @@ public class App {
                 break;
             }
 
-            if (caracterPercorrido.equals("#"))
+            if (caracterPercorrido=='#')
                 break;
                 
-            if (caracterPercorrido.equals("/") || caracterPercorrido.equals("\\")) {
+            if (caracterPercorrido=='/' || caracterPercorrido=='\\') {
                 direction = mudarDirection(direction, caracterPercorrido);
             }
 
-            if (caracterPercorrido.matches("[0-9.]+") && Integer.parseInt(caracterPercorrido) >= 0)
-            {
-                listaDinheiroCapturado.add(caracterPercorrido);
+            if (Character.isDigit(caracterPercorrido)) {
+                listaDinheiroCapturado.add(String.valueOf(caracterPercorrido));
             }
 
-            String prox = "";
+            char prox = '\0';
             switch (direction) {
                 case "direita":
                     percorrerColunas++;
@@ -112,7 +111,7 @@ public class App {
             }
             prox = mapa[percorrerLinhas][percorrerColunas];
 
-            if (!prox.matches("[0-9.]+") && caracterPercorrido.matches("[0-9.]+")){
+            if (Character.isDigit(caracterPercorrido)&& !Character.isDigit(prox)) {
                 listaDinheiroCapturado.add("-");
             }
         }
@@ -125,7 +124,7 @@ public class App {
 
         for(String numero : numeros){
             if (Integer.parseInt(numero) > 0){
-                //System.out.println(Integer.parseInt(numero)); < Ordem do dinheiro encontrado, descomentar para teste
+                //System.out.println(Integer.parseInt(numero)); //< Ordem do dinheiro encontrado, descomentar para teste
                 soma += Integer.parseInt(numero);
             }
         }
