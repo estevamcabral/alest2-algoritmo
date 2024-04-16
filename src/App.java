@@ -41,16 +41,16 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        File file = new File("src/casoD1500.txt");
+        File file = new File("src/casoD50.txt");
         Scanner scanner = new Scanner(file);
         String[] tamanho = scanner.nextLine().split(" ");
-        int tam = Integer.parseInt(tamanho[0]);
+        int tamLinhas = Integer.parseInt(tamanho[0]);
+        int tamColunas = Integer.parseInt(tamanho[1]);
+        String[][] mapa = new String[tamLinhas][tamColunas];
 
-        String[][] mapa = new String[tam][tam];
-
-        for (int i = 0; i < tam && scanner.hasNextLine(); i++) {
+        for (int i = 0; i < tamLinhas && scanner.hasNextLine(); i++) {
             String[] linha = scanner.nextLine().split("");
-            for (int j = 0; j < linha.length && j < tam; j++) {
+            for (int j = 0; j < linha.length && j < tamColunas; j++) {
                 mapa[i][j] = linha[j];
             }
         }
