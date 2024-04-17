@@ -41,6 +41,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        long tempoInicial = System.currentTimeMillis();
         File file = new File("src/casoD50.txt");
         Scanner scanner = new Scanner(file);
         String[] tamanho = scanner.nextLine().split(" ");
@@ -56,10 +57,9 @@ public class App {
         }
         
         scanner.close();
-
-        int percorrerLinhas = 0, percorrerColunas = 0;
         char caracterPercorrido;
 
+        int percorrerLinhas = 0, percorrerColunas = 0;
         String direction = "direita";
 
         LinkedList<String> listaDinheiroCapturado = new LinkedList<>();
@@ -120,15 +120,16 @@ public class App {
         String numeros[] = listAsString.split("-");
 
         //System.out.println("Ordem do dinheiro encontrado:");
-        int soma = 0;
+        long soma = 0;
 
         for(String numero : numeros){
-            if (Integer.parseInt(numero) > 0){
-                //System.out.println(Integer.parseInt(numero)); //< Ordem do dinheiro encontrado, descomentar para teste
-                soma += Integer.parseInt(numero);
+            if (Long.parseLong(numero) > 0){
+              //  System.out.println(Long.parseLong(numero)); < Descomentar para ordem
+                soma += Long.parseLong(numero);
             }
         }
         System.out.println("Total de dinheiro encontrado: " + soma);
-
+        long tempoFinal = System.currentTimeMillis();
+        System.out.println("Tempo de execução para o caso D50: " + (tempoFinal - tempoInicial)+" milissegundos.");
     }
 }
